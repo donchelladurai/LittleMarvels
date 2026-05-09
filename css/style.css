@@ -308,8 +308,8 @@ section { padding-block: var(--s-9); position: relative; }
 @media (max-width: 920px) {
   .canopy-hero__inner {
     grid-template-columns: 1fr;
-    padding-block: var(--s-6) var(--s-8);
-    gap: var(--s-6);
+    padding-block: var(--s-6) var(--s-2);
+    gap: var(--s-8);
     min-height: 0;
     align-items: stretch;
   }
@@ -330,11 +330,11 @@ section { padding-block: var(--s-9); position: relative; }
   opacity: 0.65;
   transform: rotate(8deg);
 }
-.hero-decor--spark { fill: var(--c-purple); }
+.hero-decor--spark { fill: var(--c-purple); z-index: 2; }
 .hero-decor--spark-tl {
-  top: -8px; left: -36px;
+  top: -14px; left: -22px;
   width: 28px; height: 28px;
-  opacity: 0.85;
+  opacity: 0.95;
   transform: rotate(-12deg);
 }
 .canopy-hero.is-bloomed .hero-decor--spark {
@@ -448,6 +448,17 @@ section { padding-block: var(--s-9); position: relative; }
 
 .canopy-hero__copy .lede { max-width: 50ch; margin-bottom: var(--s-6); position: relative; z-index: 1; }
 .canopy-hero__copy .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); position: relative; z-index: 1; }
+@media (max-width: 600px) {
+  .canopy-hero__copy .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--s-3);
+  }
+  .canopy-hero__copy .hero-actions .btn {
+    justify-content: center;
+    width: 100%;
+  }
+}
 
 /* Sticker-style hint — tilted sticker with animated tap target, sparkle, and an arrow pointing to the tree */
 .canopy-hero__hint {
@@ -548,12 +559,20 @@ section { padding-block: var(--s-9); position: relative; }
 @keyframes hint-arrow-draw { to { stroke-dashoffset: 0; } }
 
 @media (max-width: 920px) {
-  .hint-arrow-doodle { width: 70px; height: 46px; left: 0; }
+  .canopy-hero__art-stack { gap: 0; }
+  .hint-arrow-doodle {
+    width: 60px; height: 38px;
+    left: 0;
+    margin-block: 2px 0;
+  }
+  .canopy-hero__art { margin-top: -10px; }
 }
 @media (max-width: 600px) {
   .canopy-hero__hint { font-size: var(--fs-xs); }
   .hint-tap-badge { width: 28px; height: 28px; }
   .hint-tap-icon { width: 20px; height: 20px; }
+  .hint-arrow-doodle { width: 50px; height: 32px; }
+  .canopy-hero__art { margin-top: -14px; }
 }
 
 /* Art stack: hint pill above, then SVG art */
@@ -578,7 +597,7 @@ section { padding-block: var(--s-9); position: relative; }
 }
 @media (max-width: 920px) {
   .canopy-hero__art {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 2;
     margin-inline: calc(-1 * var(--s-5));
     width: calc(100% + 2 * var(--s-5));
     max-height: 60vh;
@@ -588,7 +607,7 @@ section { padding-block: var(--s-9); position: relative; }
   .canopy-hero__art { margin-inline: calc(-1 * var(--s-6)); width: calc(100% + 2 * var(--s-6)); }
 }
 @media (max-width: 600px) {
-  .canopy-hero__art { aspect-ratio: 1 / 1; max-height: 70vh; }
+  .canopy-hero__art { aspect-ratio: 3 / 2; max-height: 70vh; }
 }
 
 /* SVG canvas — fills its art cell */
