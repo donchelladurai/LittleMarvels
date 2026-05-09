@@ -281,66 +281,587 @@ section { padding-block: var(--s-9); position: relative; }
   .nav-list .nav-cta { margin: var(--s-2) 0 0; text-align: center; }
 }
 
-/* ---------- Hero ---------- */
-.hero {
+/* ---------- Living Canopy hero ---------- */
+.canopy-hero {
   position: relative;
-  padding-block: var(--s-9) var(--s-9);
   overflow: hidden;
-}
-.hero::before {
-  content: ""; position: absolute; inset: 0;
+  isolation: isolate;
   background:
-    radial-gradient(ellipse at 12% 18%, var(--c-orange-10) 0%, transparent 45%),
-    radial-gradient(ellipse at 88% 10%, var(--c-purple-10) 0%, transparent 50%);
-  pointer-events: none; z-index: 0;
+    radial-gradient(ellipse at 75% 35%, var(--c-orange-10) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 10%, var(--c-purple-10) 0%, transparent 45%),
+    var(--c-cream);
+  --mx: 0; --my: 0;
 }
-.hero .container {
-  position: relative; z-index: 1;
+
+.canopy-hero__inner {
+  position: relative;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: var(--s-8) var(--s-5);
+  min-height: clamp(560px, 86vh, 860px);
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
   gap: var(--s-7);
   align-items: center;
 }
+@media (min-width: 720px) { .canopy-hero__inner { padding-inline: var(--s-6); } }
 @media (max-width: 920px) {
-  .hero .container { grid-template-columns: 1fr; }
+  .canopy-hero__inner {
+    grid-template-columns: 1fr;
+    padding-block: var(--s-6) var(--s-8);
+    gap: var(--s-6);
+    min-height: 0;
+    align-items: stretch;
+  }
 }
 
-.hero-eyebrow {
+.canopy-hero__copy { position: relative; }
+
+/* Decorative flourishes within the copy area */
+.hero-decor {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-decor--twig {
+  top: -34px; right: -18px;
+  width: 96px; height: 96px;
+  color: var(--c-orange);
+  opacity: 0.65;
+  transform: rotate(8deg);
+}
+.hero-decor--spark { fill: var(--c-purple); }
+.hero-decor--spark-tl {
+  top: -8px; left: -36px;
+  width: 28px; height: 28px;
+  opacity: 0.85;
+  transform: rotate(-12deg);
+}
+.canopy-hero.is-bloomed .hero-decor--spark {
+  animation: spark-twinkle 3.2s ease-in-out infinite 1.4s;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+@keyframes spark-twinkle {
+  0%, 100% { scale: 0.9; opacity: 0.55; }
+  50%      { scale: 1.15; opacity: 1; }
+}
+@media (max-width: 920px) {
+  .hero-decor--twig { top: -20px; right: -8px; width: 72px; height: 72px; }
+  .hero-decor--spark-tl { top: -4px; left: -8px; }
+}
+@media (max-width: 600px) {
+  .hero-decor--twig { width: 60px; height: 60px; opacity: 0.5; }
+}
+
+.canopy-hero__copy .hero-eyebrow {
   display: inline-flex; align-items: center; gap: var(--s-2);
-  background: var(--c-purple-10); color: var(--c-purple);
+  background: var(--c-white);
+  border: 1px solid var(--c-purple-50);
+  color: var(--c-purple);
   padding: var(--s-2) var(--s-4);
   border-radius: var(--r-pill);
   font-size: var(--fs-xs);
   font-weight: 600;
   letter-spacing: 0.06em;
   margin-bottom: var(--s-5);
+  box-shadow: 0 2px 6px rgba(103, 34, 188, 0.10);
+  transform: rotate(-1.5deg);
+  transform-origin: left center;
+  position: relative;
+  z-index: 1;
 }
-.hero h1 {
+.canopy-hero__copy h1 {
   font-size: var(--fs-4xl);
   letter-spacing: -0.02em;
   margin-bottom: var(--s-5);
-}
-.hero h1 .accent-orange { color: var(--c-orange); font-style: italic; }
-.hero h1 .accent-purple { color: var(--c-purple); }
-.hero .lede { max-width: 50ch; margin-bottom: var(--s-6); }
-.hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); }
-
-.hero-art {
   position: relative;
-  aspect-ratio: 1 / 1;
-  max-width: 540px;
-  margin-inline: auto;
+  z-index: 1;
+}
+.canopy-hero__copy h1 .accent-orange { color: var(--c-orange); font-style: italic; }
+.canopy-hero__copy h1 .accent-purple { color: var(--c-purple); }
+
+/* Stylized ampersand — readable & with a touch of italic personality */
+.hero-amp {
+  display: inline-block;
+  font-style: italic;
+  font-weight: 500;
+  font-variation-settings: "SOFT" 50, "WONK" 0, "opsz" 144;
+  color: var(--c-charcoal-70);
+  font-size: 1.0em;
+  margin-inline: 0.08em;
+}
+
+/* Hand-drawn squiggle underline under "marvellously" */
+.has-underline {
+  position: relative;
+  display: inline-block;
+}
+.accent-underline {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: -0.18em;
+  width: 104%;
+  height: 0.36em;
+  pointer-events: none;
+  overflow: visible;
+}
+.accent-underline path {
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+}
+.canopy-hero.is-bloomed .accent-underline path {
+  animation: underline-draw 1.1s var(--ease) 0.9s forwards;
+}
+@keyframes underline-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Wavy CSS underline on "worthy of belonging" — handles wrap natively */
+.has-wavy {
+  text-decoration: underline wavy var(--c-purple-50);
+  text-decoration-thickness: 2.5px;
+  text-underline-offset: 0.2em;
+  -webkit-text-decoration: underline wavy var(--c-purple-50);
+  -webkit-text-decoration-thickness: 2.5px;
+}
+@supports (text-decoration-thickness: 2.5px) {
+  .has-wavy { text-decoration-thickness: 2.5px; }
+}
+
+/* Small sparkle riding next to "belonging." */
+.hero-sparkle {
+  display: inline-block;
+  width: 0.42em;
+  height: 0.42em;
+  vertical-align: 0.45em;
+  fill: var(--c-orange);
+  margin-left: 0.08em;
+  transform: rotate(12deg);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.canopy-hero.is-bloomed .hero-sparkle {
+  animation: spark-twinkle 2.8s ease-in-out infinite 1.6s;
+}
+
+.canopy-hero__copy .lede { max-width: 50ch; margin-bottom: var(--s-6); position: relative; z-index: 1; }
+.canopy-hero__copy .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); position: relative; z-index: 1; }
+
+/* Sticker-style hint — tilted sticker with animated tap target, sparkle, and an arrow pointing to the tree */
+.canopy-hero__hint {
+  display: inline-flex; align-items: center; gap: var(--s-3);
+  margin-top: 0;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-purple);
+  background: linear-gradient(135deg, var(--c-white) 0%, #FAF5FF 100%);
+  border: 2px dashed var(--c-purple);
+  border-radius: var(--r-pill);
+  max-width: max-content;
+  position: relative; z-index: 2;
+  transform: rotate(-2deg);
+  transform-origin: center;
+  box-shadow:
+    0 8px 22px rgba(103, 34, 188, 0.20),
+    0 2px 6px rgba(103, 34, 188, 0.12),
+    inset 0 0 0 4px var(--c-white);
+  letter-spacing: 0.005em;
+}
+.canopy-hero.is-bloomed .canopy-hero__hint {
+  animation: hint-wobble 4.5s ease-in-out infinite 2.2s;
+}
+@keyframes hint-wobble {
+  0%, 100% { transform: rotate(-2deg)   translateY(0); }
+  25%      { transform: rotate(0.5deg)  translateY(-3px); }
+  50%      { transform: rotate(-1deg)   translateY(0); }
+  75%      { transform: rotate(1deg)    translateY(-1.5px); }
+}
+
+.canopy-hero__hint-text { line-height: 1.3; }
+.canopy-hero__hint-text em {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 500;
+  font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 144;
+  color: var(--c-orange);
+  font-size: 1.05em;
+}
+
+/* Animated tap-target badge */
+.hint-tap-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 32px; height: 32px;
+  flex-shrink: 0;
+  background: var(--c-purple-10);
+  border-radius: 50%;
+  color: var(--c-purple);
+}
+.hint-tap-icon { width: 24px; height: 24px; overflow: visible; }
+.hint-ripple {
+  transform-origin: center;
+  transform-box: fill-box;
+  opacity: 0;
+}
+.canopy-hero.is-bloomed .hint-ripple--1 { animation: hint-tap-ripple 1.8s ease-out infinite; }
+.canopy-hero.is-bloomed .hint-ripple--2 { animation: hint-tap-ripple 1.8s ease-out 0.5s infinite; }
+@keyframes hint-tap-ripple {
+  0%   { scale: 0.4; opacity: 1; }
+  90%  { opacity: 0; }
+  100% { scale: 1.6; opacity: 0; }
+}
+
+/* Inline sparkle on the right of the pill */
+.hint-spark {
+  width: 16px; height: 16px;
+  fill: var(--c-orange);
+  flex-shrink: 0;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.canopy-hero.is-bloomed .hint-spark {
+  animation: spark-twinkle 2.5s ease-in-out infinite 0.6s;
+}
+
+/* Hand-drawn arrow doodle pointing from hint to tree */
+.hint-arrow-doodle {
+  width: 88px; height: 56px;
+  color: var(--c-orange);
+  align-self: center;
+  margin-block: var(--s-1) 0;
+  pointer-events: none;
+  transform: rotate(4deg);
+  transform-origin: center;
+  position: relative;
+  left: 14px;
+}
+.hint-arrow-path {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+}
+.canopy-hero.is-bloomed .hint-arrow-path {
+  animation: hint-arrow-draw 1.5s var(--ease) 2.6s forwards;
+}
+@keyframes hint-arrow-draw { to { stroke-dashoffset: 0; } }
+
+@media (max-width: 920px) {
+  .hint-arrow-doodle { width: 70px; height: 46px; left: 0; }
+}
+@media (max-width: 600px) {
+  .canopy-hero__hint { font-size: var(--fs-xs); }
+  .hint-tap-badge { width: 28px; height: 28px; }
+  .hint-tap-icon { width: 20px; height: 20px; }
+}
+
+/* Art stack: hint pill above, then SVG art */
+.canopy-hero__art-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-3);
   width: 100%;
 }
-.hero-art svg { width: 100%; height: 100%; overflow: visible; }
+.canopy-hero__art-stack .canopy-hero__hint {
+  margin-top: 0;
+  align-self: center;
+}
 
-/* Floating leaves animation */
-@keyframes drift-1 { 0%,100% { transform: translate(0,0) rotate(0); } 50% { transform: translate(6px,-8px) rotate(4deg); } }
-@keyframes drift-2 { 0%,100% { transform: translate(0,0) rotate(0); } 50% { transform: translate(-5px,-6px) rotate(-3deg); } }
-@keyframes drift-3 { 0%,100% { transform: translate(0,0) rotate(0); } 50% { transform: translate(4px,-10px) rotate(5deg); } }
-.leaf-drift-1 { animation: drift-1 6s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
-.leaf-drift-2 { animation: drift-2 7s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
-.leaf-drift-3 { animation: drift-3 8s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+/* Art cell: holds the SVG canvas */
+.canopy-hero__art {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  max-height: 720px;
+}
+@media (max-width: 920px) {
+  .canopy-hero__art {
+    aspect-ratio: 4 / 3;
+    margin-inline: calc(-1 * var(--s-5));
+    width: calc(100% + 2 * var(--s-5));
+    max-height: 60vh;
+  }
+}
+@media (min-width: 720px) and (max-width: 920px) {
+  .canopy-hero__art { margin-inline: calc(-1 * var(--s-6)); width: calc(100% + 2 * var(--s-6)); }
+}
+@media (max-width: 600px) {
+  .canopy-hero__art { aspect-ratio: 1 / 1; max-height: 70vh; }
+}
+
+/* SVG canvas — fills its art cell */
+.canopy-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+}
+.canopy-svg .canopy-halo,
+.canopy-svg .canopy-ground,
+.canopy-svg .branches,
+.canopy-svg .canopy-labels,
+.canopy-svg .leaf:not(.marvel) { pointer-events: none; }
+
+/* Depth layers — subtle parallax on the entire group */
+.canopy-depth {
+  transform-box: fill-box;
+  transform-origin: 0 0;
+  transition: translate 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.canopy-depth--far { translate: calc(var(--mx) * 3px) calc(var(--my) * 3px); }
+.canopy-depth--mid { translate: calc(var(--mx) * 6px) calc(var(--my) * 6px); transition-duration: 450ms; }
+.canopy-depth--near { translate: calc(var(--mx) * 14px) calc(var(--my) * 14px); transition-duration: 350ms; }
+
+/* Halo gentle breathe */
+.canopy-halo {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.canopy-hero.is-bloomed .canopy-halo {
+  animation: halo-breathe 9s ease-in-out infinite;
+}
+@keyframes halo-breathe {
+  0%, 100% { opacity: 0.85; scale: 1; }
+  50%      { opacity: 1; scale: 1.04; }
+}
+
+/* Branches: bloom in via stroke-dashoffset */
+.canopy-svg .branch {
+  stroke-dasharray: 1600;
+  stroke-dashoffset: 1600;
+}
+.canopy-hero.is-bloomed .canopy-svg .branch {
+  animation: branch-draw 1.4s var(--ease) var(--bd, 0s) forwards;
+}
+@keyframes branch-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Leaves */
+.leaf {
+  transform-box: fill-box;
+}
+.leaf-parallax {
+  transform-box: fill-box;
+  transform-origin: 0 0;
+  translate: calc(var(--mx, 0) * var(--pf, 0.5) * 14px) calc(var(--my, 0) * var(--pf, 0.5) * 14px);
+  transition: translate 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.leaf-sway {
+  transform-box: fill-box;
+  transform-origin: 0 0;
+  animation-duration: var(--s, 6s);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-delay: var(--d, 0s);
+  animation-play-state: paused;
+}
+.canopy-hero.is-bloomed .leaf-sway { animation-play-state: running; }
+.canopy-hero.is-bloomed .sway-1 { animation-name: leaf-sway-1; }
+.canopy-hero.is-bloomed .sway-2 { animation-name: leaf-sway-2; }
+.canopy-hero.is-bloomed .sway-3 { animation-name: leaf-sway-3; }
+.canopy-hero.is-bloomed .sway-4 { animation-name: leaf-sway-4; }
+.canopy-hero.is-bloomed .sway-5 { animation-name: leaf-sway-5; }
+@keyframes leaf-sway-1 { 0%,100% { rotate: -2deg; } 50% { rotate: 3deg; } }
+@keyframes leaf-sway-2 { 0%,100% { rotate: 2deg; }  50% { rotate: -3deg; } }
+@keyframes leaf-sway-3 { 0%,100% { rotate: -3deg; } 50% { rotate: 2deg; } }
+@keyframes leaf-sway-4 { 0%,100% { rotate: 1deg; }  50% { rotate: -2.5deg; } }
+@keyframes leaf-sway-5 { 0%,100% { rotate: -2.5deg; } 50% { rotate: 2.5deg; } }
+
+.leaf-path {
+  transform-box: fill-box;
+  transform-origin: 0 0;
+  scale: 0;
+  opacity: 0;
+}
+.canopy-hero.is-bloomed .leaf-path {
+  animation: leaf-bloom 700ms cubic-bezier(0.34, 1.56, 0.64, 1) var(--ld, 1.4s) forwards;
+}
+@keyframes leaf-bloom {
+  from { scale: 0; opacity: 0; }
+  to   { scale: 1; opacity: 1; }
+}
+
+.leaf-path                 { fill: var(--c-purple); }
+.leaf--o .leaf-path        { fill: var(--c-orange); }
+.leaf--p .leaf-path        { fill: var(--c-purple); }
+
+/* Marvel leaves — bigger, glowing, interactive */
+.leaf.marvel {
+  pointer-events: auto;
+  cursor: pointer;
+  outline: none;
+}
+.leaf-scale-static {
+  transform-box: fill-box;
+  transform-origin: 0 0;
+  scale: 1.4;
+  filter: drop-shadow(0 0 6px rgba(103, 34, 188, 0.4));
+  transition: scale 280ms var(--ease), filter 280ms var(--ease);
+}
+.marvel.leaf--o .leaf-scale-static {
+  filter: drop-shadow(0 0 6px rgba(242, 137, 28, 0.45));
+}
+.canopy-hero.is-bloomed .marvel.leaf--p .leaf-scale-static {
+  animation: marvel-glow-purple 2.8s ease-in-out infinite;
+}
+.canopy-hero.is-bloomed .marvel.leaf--o .leaf-scale-static {
+  animation: marvel-glow-orange 2.8s ease-in-out infinite;
+}
+@keyframes marvel-glow-purple {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(103, 34, 188, 0.4)); }
+  50%      { filter: drop-shadow(0 0 14px rgba(103, 34, 188, 0.75)); }
+}
+@keyframes marvel-glow-orange {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(242, 137, 28, 0.45)); }
+  50%      { filter: drop-shadow(0 0 14px rgba(242, 137, 28, 0.78)); }
+}
+.marvel:hover .leaf-scale-static,
+.marvel.is-active .leaf-scale-static {
+  scale: 1.7;
+}
+.marvel:focus-visible .leaf-scale-static {
+  scale: 1.85;
+  filter: drop-shadow(0 0 0 3px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 0 5px var(--c-purple));
+}
+.marvel.leaf--o:focus-visible .leaf-scale-static {
+  filter: drop-shadow(0 0 0 3px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 0 5px var(--c-orange));
+}
+.marvel.is-active.leaf--p .leaf-scale-static { filter: drop-shadow(0 0 20px rgba(103, 34, 188, 0.95)); }
+.marvel.is-active.leaf--o .leaf-scale-static { filter: drop-shadow(0 0 20px rgba(242, 137, 28, 0.95)); }
+
+/* Marvel tap target — invisible, generous hit zone for finger taps */
+.marvel-tap-target {
+  fill: rgba(0, 0, 0, 0);
+  pointer-events: all;
+}
+
+/* Marvel pulse ring — animated affordance saying "I'm interactive" */
+.marvel-pulse-ring {
+  fill: none;
+  stroke-width: 2;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  pointer-events: none;
+}
+.marvel.leaf--p .marvel-pulse-ring { stroke: var(--c-purple); }
+.marvel.leaf--o .marvel-pulse-ring { stroke: var(--c-orange); }
+.canopy-hero.is-bloomed .marvel .marvel-pulse-ring {
+  animation: marvel-ring-expand 2.6s ease-out infinite;
+  animation-delay: var(--rd, 2s);
+}
+@keyframes marvel-ring-expand {
+  0%   { scale: 0.6; opacity: 0; stroke-width: 3; }
+  10%  { opacity: 0.85; }
+  100% { scale: 2.8; opacity: 0; stroke-width: 1; }
+}
+/* Pause the pulse on hover/active so it doesn't compete with the visible card */
+.marvel:hover .marvel-pulse-ring,
+.marvel:focus-visible .marvel-pulse-ring,
+.marvel.is-active .marvel-pulse-ring { animation-play-state: paused; opacity: 0; }
+
+/* Marvel labels — always-visible value names beside each marvel leaf */
+.marvel-label {
+  font-family: var(--f-display);
+  font-size: 38px;
+  font-weight: 500;
+  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
+  letter-spacing: 0.005em;
+  paint-order: stroke;
+  stroke: var(--c-cream);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+  opacity: 0;
+}
+.marvel-label--p { fill: var(--c-purple); }
+.marvel-label--o { fill: var(--c-orange); }
+.canopy-hero.is-bloomed .marvel-label {
+  animation: marvel-label-fade 700ms ease-out var(--ll, 2s) forwards;
+}
+@keyframes marvel-label-fade { to { opacity: 0.95; } }
+@media (max-width: 720px) {
+  .marvel-label { font-size: 50px; stroke-width: 9; }
+  /* Bigger marvel leaves on phones for tap-friendliness */
+  .leaf-scale-static { scale: 1.75; }
+  .marvel:hover .leaf-scale-static,
+  .marvel.is-active .leaf-scale-static { scale: 2.05; }
+  .marvel:focus-visible .leaf-scale-static { scale: 2.2; }
+  /* Pulse ring scales up too on phones */
+  .marvel .marvel-pulse-ring { stroke-width: 3; }
+}
+
+/* Value card overlay */
+.value-card {
+  position: absolute;
+  z-index: 4;
+  width: 280px;
+  background: var(--c-white);
+  border: 1px solid var(--c-purple-50);
+  border-radius: var(--r-md);
+  padding: var(--s-5);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  scale: 0.92;
+  transform-origin: center top;
+  transition: opacity 220ms var(--ease), scale 220ms var(--ease);
+  pointer-events: auto;
+}
+.value-card.is-visible { opacity: 1; scale: 1; }
+.value-card[hidden] { display: none; }
+.value-card__close {
+  position: absolute; top: var(--s-2); right: var(--s-2);
+  width: 30px; height: 30px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: var(--c-charcoal-70);
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.value-card__close:hover { background: var(--c-purple-10); color: var(--c-purple); }
+.value-card__close:focus-visible { outline: 2px solid var(--c-purple); outline-offset: 2px; }
+.value-card__eyebrow {
+  display: block;
+  font-family: var(--f-body);
+  font-size: var(--fs-xs); font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--c-purple);
+  margin-bottom: var(--s-2);
+}
+.value-card__title {
+  font-family: var(--f-display);
+  font-size: var(--fs-xl); font-weight: 500;
+  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
+  color: var(--c-charcoal);
+  margin-bottom: var(--s-2);
+}
+.value-card__body {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--c-charcoal-70);
+  line-height: 1.55;
+}
+
+/* Reduced motion: drop animations + parallax */
+@media (prefers-reduced-motion: reduce) {
+  .canopy-svg .branch { stroke-dashoffset: 0 !important; animation: none !important; }
+  .leaf-path { scale: 1 !important; opacity: 1 !important; animation: none !important; }
+  .leaf-sway { animation: none !important; }
+  .canopy-halo { animation: none !important; }
+  .marvel .leaf-scale-static { animation: none !important; }
+  .marvel .marvel-pulse-ring { animation: none !important; opacity: 0 !important; }
+  .marvel-label { opacity: 0.95 !important; animation: none !important; }
+  .accent-underline path { stroke-dashoffset: 0 !important; animation: none !important; }
+  .hero-decor--spark, .hero-sparkle, .hint-spark { animation: none !important; opacity: 0.85 !important; }
+  .canopy-hero__hint { animation: none !important; }
+  .hint-ripple { animation: none !important; opacity: 0 !important; }
+  .hint-arrow-path { stroke-dashoffset: 0 !important; animation: none !important; }
+  .leaf-parallax,
+  .canopy-depth { translate: 0 0 !important; transition: none !important; }
+  .value-card { transition: none !important; }
+}
 
 /* ---------- About strip ---------- */
 .about-strip {
