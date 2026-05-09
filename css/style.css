@@ -458,6 +458,18 @@ section { padding-block: var(--s-9); position: relative; }
     justify-content: center;
     width: 100%;
   }
+  /* Buttons with a trailing icon: add a phantom spacer on the left and push apart,
+     so the label sits dead-center while the icon hugs the right edge. */
+  .canopy-hero__copy .hero-actions .btn:has(.arrow) {
+    justify-content: space-between;
+    padding-inline: var(--s-5);
+  }
+  .canopy-hero__copy .hero-actions .btn:has(.arrow)::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
 }
 
 /* Sticker-style hint — tilted sticker with animated tap target, sparkle, and an arrow pointing to the tree */
