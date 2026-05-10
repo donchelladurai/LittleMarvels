@@ -27,28 +27,28 @@
       description: 'A relaxed gathering for parents and carers — tea, biscuits, and a friendly ear.',
       start: { dateTime: addDays(2, 10, 30) },
       end:   { dateTime: addDays(2, 12, 0) },
-      location: 'Little Marvels, Address line 1'
+      location: 'Little Marvels, 15 Garry St, Glasgow G44 4BA'
     },
     {
       summary: 'Sensory Play Session',
       description: 'A targeted sensory session for children with additional support needs and their siblings.',
       start: { dateTime: addDays(7, 14, 0) },
       end:   { dateTime: addDays(7, 15, 30) },
-      location: 'Little Marvels, Address line 1'
+      location: 'Little Marvels, 15 Garry St, Glasgow G44 4BA'
     },
     {
       summary: 'Caregiver Workshop: Communication Strategies',
       description: 'Practical tools for everyday communication with non-verbal and minimally-verbal children.',
       start: { dateTime: addDays(12, 10, 0) },
       end:   { dateTime: addDays(12, 12, 0) },
-      location: 'Little Marvels, Address line 1'
+      location: 'Little Marvels, 15 Garry St, Glasgow G44 4BA'
     },
     {
       summary: 'Sibling Bonding Afternoon',
       description: 'Crafts, games, and cake for siblings of children with additional needs.',
       start: { dateTime: addDays(20, 13, 0) },
       end:   { dateTime: addDays(20, 16, 0) },
-      location: 'Little Marvels, Address line 1'
+      location: 'Little Marvels, 15 Garry St, Glasgow G44 4BA'
     }
   ];
 
