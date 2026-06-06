@@ -1215,19 +1215,13 @@ section { padding-block: var(--s-9); position: relative; }
 }
 @media (max-width: 600px) { .footer-map { height: 200px; } }
 
-/* Credit line — centered, very bottom of the footer */
-.footer-credit {
-  margin-top: var(--s-3);
-  text-align: center;
-  font-size: var(--fs-xs);
-  color: var(--c-charcoal-70);
-}
-.footer-credit a {
+/* Credit text now sits inline in the footer-bottom row (right side via space-between) */
+.footer-credit-text a {
   color: var(--c-purple);
   text-decoration: none;
   font-weight: 500;
 }
-.footer-credit a:hover { text-decoration: underline; }
+.footer-credit-text a:hover { text-decoration: underline; }
 
 .footer-col h5 {
   font-family: var(--f-body); font-size: var(--fs-xs);
