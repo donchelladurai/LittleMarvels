@@ -219,6 +219,33 @@ section { padding-block: var(--s-9); position: relative; }
 .site-header .container {
   display: flex; align-items: center; justify-content: space-between;
   padding-block: var(--s-4);
+  transition: padding-block var(--t-med) var(--ease);
+}
+
+/* Shrink the header once the user scrolls past the top */
+.brand-mark { transition: height var(--t-med) var(--ease), max-height var(--t-med) var(--ease); }
+.site-header.is-scrolled .container { padding-block: var(--s-2); }
+/* Logo stays visually large, but a negative margin lets it bleed below
+   the bar so the sticky bar itself stays compact. */
+.site-header.is-scrolled .brand-mark {
+  height: 144px;
+  max-height: 144px;
+  margin-bottom: -48px;
+}
+@media (max-width: 920px) {
+  .site-header.is-scrolled .brand-mark {
+    height: 120px;
+    max-height: 120px;
+    margin-bottom: -40px;
+  }
+}
+@media (max-width: 600px) {
+  .site-header.is-scrolled .container { padding-block: var(--s-2); }
+  .site-header.is-scrolled .brand-mark {
+    height: 100px;
+    max-height: 100px;
+    margin-bottom: -36px;
+  }
 }
 
 .brand {
@@ -227,9 +254,9 @@ section { padding-block: var(--s-9); position: relative; }
 }
 .brand:hover { text-decoration: none; }
 .brand-mark {
-  height: 120px;
+  height: 300px;
   width: auto;
-  max-height: 120px;
+  max-height: 300px;
   max-width: none;
 }
 @media (max-width: 920px) { .brand-mark { height: 160px; max-height: 160px; } }
