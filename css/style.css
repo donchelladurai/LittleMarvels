@@ -1043,6 +1043,24 @@ section { padding-block: var(--s-9); position: relative; }
 .image-ph[data-ratio="16/9"] { aspect-ratio: 16/9; }
 .image-ph[data-ratio="3/2"] { aspect-ratio: 3/2; }
 
+/* When a real photo is inside the wrapper, hide the placeholder pattern and let
+   the image fill the rounded box. */
+.image-ph:has(img) {
+  background: none;
+  border: 0;
+}
+.image-ph:has(img)::after { display: none; }
+.image-ph:has(img) .image-ph__inner { display: none; }
+.image-ph img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+}
+
 /* ---------- Values grid ---------- */
 .values-grid {
   display: grid;
